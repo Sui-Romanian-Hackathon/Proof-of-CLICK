@@ -117,6 +117,12 @@ export function ClickerGame({ availableTime, onTimeUsed, onTimeUpdate }: Clicker
     }
   }
 
+  function stop() {
+    if (!isRunning) return;
+    setIsRunning(false);
+    setStatus("Game stopped");
+  }
+
   function createCounter(): Promise<string | null> {
     setWaiting(true);
     setStatus("Creating on-chain object…");
@@ -198,9 +204,15 @@ export function ClickerGame({ availableTime, onTimeUsed, onTimeUpdate }: Clicker
         <Heading size="4">BitEater Clicker</Heading>
 
         <Flex align="center" gap="3" wrap="wrap" className="stats">
-          <Button size="2" onClick={start} disabled={startDisabled}>
-            {!currentAccount ? "Connecting..." : "Start"}
-          </Button>
+          {isRunning ? (
+            <Button size="2" onClick={stop} color="red" variant="solid">
+              Stop
+            </Button>
+          ) : (
+            <Button size="2" onClick={start} disabled={startDisabled}>
+              {!currentAccount ? "Connecting..." : "Start"}
+            </Button>
+          )}
 
           <Text className="pill">⏱ {timeLeft}s</Text>
           <Text className="pill">⭐ {score}</Text>
