@@ -48,4 +48,4 @@ async def sign_claim(req: ClaimRequest):
         "signature": signed_message.signature.hex()
     }
 
-# To run this: uvicorn server:app --reload --port 5000
+# uvicorn server:app --reload --port 5000

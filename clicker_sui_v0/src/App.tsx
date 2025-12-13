@@ -158,7 +158,7 @@ function App() {
         }}
       >
         <Box>
-          <Heading>BitEater Game 🎮</Heading>
+          <Heading>Proof of CLICK 🎮</Heading>
         </Box>
 
         <Flex gap="4" align="center">
@@ -196,7 +196,7 @@ function App() {
             <Card size="3" style={{ minHeight: 500 }}>
               <Box p="8" style={{ textAlign: "center" }}>
                 <Heading size="9" mb="4">
-                  Welcome to BitEater! 🎮
+                  Welcome to Proof of CLICK! 🎮
                 </Heading>
                 <Text size="5" color="gray" mb="6">
                   Test your knowledge and earn time to play!

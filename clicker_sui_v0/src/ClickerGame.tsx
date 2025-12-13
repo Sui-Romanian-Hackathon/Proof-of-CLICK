@@ -281,7 +281,7 @@ export function ClickerGame({ availableTime, onTimeUsed, onTimeUpdate }: Clicker
     <Box className="page">
       {/* TOP BAR */}
       <Flex className="topbar" align="center" justify="between" gap="3" wrap="wrap">
-        <Heading size="4">BitEater Clicker</Heading>
+        <Heading size="4">Proof of CLICK</Heading>
 
         <Flex align="center" gap="3" wrap="wrap" className="stats">
           {isRunning ? (
