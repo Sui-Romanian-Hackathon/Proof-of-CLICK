@@ -217,3 +217,35 @@ Pro:
 
 https://chatgpt.com/share/693c3775-af2c-8006-baa2-5786f3eb1a8b
 
+
+
+## Prezentarea Pitch
+- 7 minute (pitch + demo) [5 slide-uri]
+- structura:
+    - problema
+    - solutie
+    - sui integration
+    - demo
+    - Impact & Future
+- problema 
+    - 1-2 point bullets only
+    - cine are problema
+- solutie
+    - what you built
+    - What it makes it different
+- sui integration
+    - how you used sui (what par of your app uses sui)
+    - which tools (sui, Walrus, Seal etc..)
+    - why this improves you solution
+    - why blockchain is needed
+- demo
+    - show essentioal flow
+    - video or screenshots if needed
+- impact & future
+    -ux
+    - long term vision
+- future improvements
+    - what would you do with more time
+    - what features would you add
+    - how would you improve the user experience
+- end (thank you + q&a)
