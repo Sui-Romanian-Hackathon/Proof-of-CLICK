@@ -147,6 +147,20 @@ function App() {
 
   return (
     <WalletGate>
+      {/* Animated Background */}
+      <div className="gradient-mesh-background" />
+      <div className="moving-background" />
+      <div className="particle-background">
+        {Array.from({ length: 15 }).map((_, i) => (
+          <div key={i} className="particle" style={{
+            left: `${(i * 7) % 100}%`,
+            top: `${(i * 11) % 100}%`,
+            animationDelay: `${i * 0.5}s`,
+            animationDuration: `${8 + (i % 5)}s`,
+          }} />
+        ))}
+      </div>
+      
       <Flex
         position="sticky"
         px="4"
@@ -155,6 +169,8 @@ function App() {
         align="center"
         style={{
           borderBottom: "1px solid var(--gray-a2)",
+          position: "relative",
+          zIndex: 1,
         }}
       >
         <Box>
@@ -190,12 +206,12 @@ function App() {
           </Box>
         </Flex>
       </Flex>
-      <Container>
+      <Container style={{ position: "relative", zIndex: 1 }}>
         <Container
           mt="5"
           pt="2"
           px="4"
-          style={{ background: "var(--gray-a2)", minHeight: 500 }}
+          style={{ background: "var(--gray-a2)", minHeight: 500, position: "relative", zIndex: 1 }}
         >
           {currentView === "home" ? (
             <Card size="3" style={{ minHeight: 500 }}>
