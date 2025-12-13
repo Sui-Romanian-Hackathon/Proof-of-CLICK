@@ -201,7 +201,7 @@ export function ClickerGame({ availableTime, onTimeUsed, onTimeUpdate }: Clicker
     <Box className="page">
       {/* TOP BAR */}
       <Flex className="topbar" align="center" justify="between" gap="3" wrap="wrap">
-        <Heading size="4">BitEater Clicker</Heading>
+        <Heading size="4" className="animate-float">BitEater Clicker</Heading>
 
         <Flex align="center" gap="3" wrap="wrap" className="stats">
           {isRunning ? (
@@ -214,8 +214,8 @@ export function ClickerGame({ availableTime, onTimeUsed, onTimeUpdate }: Clicker
             </Button>
           )}
 
-          <Text className="pill">⏱ {timeLeft}s</Text>
-          <Text className="pill">⭐ {score}</Text>
+          <Text className={`pill ${isRunning ? "animate-live-pulse" : ""}`}>⏱ {timeLeft}s</Text>
+          <Text className={`pill ${score > 0 ? "animate-live-pulse" : ""}`}>⭐ {score}</Text>
 
           <Button size="2" onClick={submitScoreOnChain} disabled={submitDisabled}>
             {waiting ? <ClipLoader size={16} /> : "Submit"}

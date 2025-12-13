@@ -158,7 +158,7 @@ function App() {
         }}
       >
         <Box>
-          <Heading>BitEater Game 🎮</Heading>
+          <Heading className="animate-float">BitEater Game 🎮</Heading>
         </Box>
 
         <Flex gap="4" align="center">
@@ -176,7 +176,12 @@ function App() {
                 Clicker Time
               </Text>
             </Box>
-            <Text size="4" weight="bold" color={availableClickerTime > 0 ? "green" : "red"}>
+            <Text 
+              size="4" 
+              weight="bold" 
+              color={availableClickerTime > 0 ? "green" : "red"}
+              className={availableClickerTime > 0 ? "animate-live-pulse" : ""}
+            >
               {currentView === "clicker" ? liveClickerTime : availableClickerTime} seconds
             </Text>
           </Box>
@@ -217,7 +222,12 @@ function App() {
                         <Text size="3" color="gray" mb="1" style={{ display: "block" }}>
                           Available Clicker Time:
                         </Text>
-                        <Text size="6" weight="bold" color={availableClickerTime > 0 ? "green" : "red"}>
+                        <Text 
+                          size="6" 
+                          weight="bold" 
+                          color={availableClickerTime > 0 ? "green" : "red"}
+                          className={availableClickerTime > 0 ? "animate-live-pulse" : ""}
+                        >
                           {availableClickerTime} seconds
                         </Text>
                       </Box>

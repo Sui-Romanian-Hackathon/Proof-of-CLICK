@@ -1,5 +1,5 @@
 import { useCurrentAccount } from "@mysten/dapp-kit";
-import { Box, Button, Card, Container, Flex, Heading, Text } from "@radix-ui/themes";
+import { Box, Card, Container, Flex, Heading, Text } from "@radix-ui/themes";
 import { ConnectButton } from "@mysten/dapp-kit";
 
 interface WalletGateProps {

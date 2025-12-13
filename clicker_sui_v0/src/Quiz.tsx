@@ -36,6 +36,7 @@ export function Quiz({ questions, onComplete }: QuizProps) {
 
   const currentQuestion = questions[currentQuestionIndex];
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+  const isLastQuestion = currentQuestionIndex === questions.length - 1;
 
   // Timer countdown effect
   useEffect(() => {
@@ -76,11 +77,13 @@ export function Quiz({ questions, onComplete }: QuizProps) {
       setScore((prevScore) => {
         if (correct) {
           // Even if time is up, if answer is correct, they get 0 points (no time remaining)
+          // Last question would be 0 * 2 = 0, so no change
           return prevScore + 0;
         }
         return prevScore;
       });
-      setTotalPoints((prevTotal) => prevTotal + 60); // Add full time to total possible
+      // Total possible points (120 for last question if doubled)
+      setTotalPoints((prevTotal) => prevTotal + (isLastQuestion ? 120 : 60));
       
       setShowResult(true);
     }
@@ -113,10 +116,12 @@ export function Quiz({ questions, onComplete }: QuizProps) {
 
     if (correct) {
       // Score is based on time remaining
-      setScore(score + remainingTime);
+      // Last question gets DOUBLE reward!
+      const pointsEarned = isLastQuestion ? remainingTime * 2 : remainingTime;
+      setScore(score + pointsEarned);
     }
-    // Total possible points is the full 60 seconds per question
-    setTotalPoints(totalPoints + 60);
+    // Total possible points is the full 60 seconds per question (120 for last question if doubled)
+    setTotalPoints(totalPoints + (isLastQuestion ? 120 : 60));
 
     setShowResult(true);
   };
@@ -169,8 +174,9 @@ export function Quiz({ questions, onComplete }: QuizProps) {
               fontFamily: "monospace",
               fontSize: "1.5rem"
             }}
+            className={isLastQuestion ? "power-up-timer" : ""}
           >
-            ⏱️ {timeRemaining}s
+            {isLastQuestion && "⚡ "}⏱️ {timeRemaining}s{isLastQuestion && " ⚡"}
           </Text>
         </Flex>
         <Progress value={progress} size="2" />
@@ -182,9 +188,31 @@ export function Quiz({ questions, onComplete }: QuizProps) {
         />
       </Box>
 
-      <Card size="3" style={{ minHeight: 400 }}>
+      <Card 
+        size="3" 
+        style={{ minHeight: 400 }} 
+        className={isLastQuestion ? "power-up-question" : ""}
+      >
         <Box p="6">
-          <Heading size="8" mb="6" style={{ textAlign: "center" }}>
+          {isLastQuestion && (
+            <Box mb="4" style={{ textAlign: "center" }} className="power-up-badge">
+              <Text size="5" weight="bold" style={{ 
+                background: "linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                animation: "powerUpGlow 2s ease-in-out infinite"
+              }}>
+                ⚡ POWER UP QUESTION - DOUBLE REWARD! ⚡
+              </Text>
+            </Box>
+          )}
+          <Heading 
+            size="8" 
+            mb="6" 
+            style={{ textAlign: "center" }}
+            className={isLastQuestion ? "power-up-heading" : ""}
+          >
             {currentQuestion.question}
           </Heading>
 
@@ -218,9 +246,12 @@ export function Quiz({ questions, onComplete }: QuizProps) {
                 weight="bold"
                 color={isCorrect ? "green" : "red"}
                 mb="4"
+                className={isCorrect ? (isLastQuestion ? "animate-power-up-success" : "animate-success") : "animate-shake"}
               >
                 {isCorrect
-                  ? `✓ Correct! +${timeRemainingForQuestion ?? 0} points (${timeRemainingForQuestion ?? 0}s remaining)`
+                  ? isLastQuestion
+                    ? `⚡ POWER UP! ✓ Correct! +${(timeRemainingForQuestion ?? 0) * 2} points (${timeRemainingForQuestion ?? 0}s × 2 = ${(timeRemainingForQuestion ?? 0) * 2}s)`
+                    : `✓ Correct! +${timeRemainingForQuestion ?? 0} points (${timeRemainingForQuestion ?? 0}s remaining)`
                   : `✗ Wrong! The correct answer was: ${currentQuestion.options[currentQuestion.correctAnswer]}`}
               </Text>
             </Box>
